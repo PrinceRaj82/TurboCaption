@@ -1,9 +1,13 @@
 import express from "express";
-// import cors from "cors";
+import cors from "cors";
 import { getSubtitles, getVideoDetails } from "youtube-caption-extractor";
 
 const app = express();
-// app.use(cors());
+app.use(cors( {
+  origin: ['https://preview--transcript-toolkit-ai.lovable.app','https://trubocaption.app','https://lovable.dev'],
+  
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
 
 // --- Extract Video ID Utility ---
 function extractVideoID(url) {
@@ -56,3 +60,4 @@ app.get("/api/captions", async (req, res) => {
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
+
